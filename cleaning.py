@@ -1,3 +1,5 @@
+#Source:https://www.sidc.be/SILSO/datafiles
+
 import pandas as pd
 
 # 1) Laden (Separator ist ;)
@@ -25,3 +27,4 @@ df_clean.to_csv("sunspots_daily_clean.csv", index=False)
 
 print(df_clean.head())
 print(len(df_clean), "Zeilen behalten")
+
