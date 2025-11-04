@@ -23,11 +23,38 @@ Alle drei Datenquellen sind öffentlich zugänglich und liefern Zeitreihen über
 - Python 3.7 oder höher
 - pip (Python Package Manager)
 
-### Dependencies installieren
+### Installation mit virtueller Umgebung (empfohlen)
+
+1. Virtuelle Umgebung erstellen:
+```bash
+python3 -m venv venv
+source venv/bin/activate  # Auf Windows: venv\Scripts\activate
+```
+
+2. Dependencies installieren:
+```bash
+pip install -r requirements.txt
+```
+
+### Installation ohne virtuelle Umgebung
 
 ```bash
 pip install -r requirements.txt
 ```
+
+**Hinweis:** Bei System-Python auf macOS/Linux kann es zu Berechtigungsproblemen kommen. Verwenden Sie in diesem Fall die virtuelle Umgebung.
+
+## PyCharm-Konfiguration
+
+Für automatische Interpreter-Auswahl:
+
+```bash
+python setup_pycharm.py
+```
+
+Danach PyCharm neu starten. Die Run-Konfiguration "Run Pipeline" sollte automatisch verfügbar sein.
+
+Siehe auch: `AUSFUEHRUNG.md` für detaillierte Anweisungen.
 
 ## Verwendung
 
@@ -35,9 +62,20 @@ pip install -r requirements.txt
 
 Die einfachste Methode ist, die gesamte Pipeline mit einem Befehl auszuführen:
 
+**Mit virtueller Umgebung:**
+```bash
+source venv/bin/activate  # Falls noch nicht aktiviert
+python run_pipeline.py
+```
+
+**Ohne virtuelle Umgebung:**
 ```bash
 python run_pipeline.py
 ```
+
+**In PyCharm:**
+- Einfach auf "Play" drücken (wenn PyCharm-Konfiguration eingerichtet ist)
+- Oder: Run → "Run Pipeline"
 
 Dieses Skript führt automatisch alle Schritte aus:
 1. Import & Bereinigung der Daten
@@ -99,9 +137,12 @@ jupyter lab notebooks/eda_analysis.ipynb
 ```
 daw_Solar/
 ├── README.md                    # Diese Datei
+├── AUSFUEHRUNG.md               # Detaillierte Ausführungsanleitung
 ├── requirements.txt             # Python Dependencies
 ├── run_pipeline.py              # Haupt-Pipeline-Skript
+├── setup_pycharm.py             # PyCharm-Konfiguration Setup
 ├── .gitignore                   # Git ignore rules
+├── venv/                        # Virtuelle Umgebung (nicht versioniert)
 │
 ├── data/                        # Datenverzeichnis
 │   ├── raw/                     # Rohdaten (nicht verändern!)

@@ -2,19 +2,28 @@
 
 ## Schnellstart
 
-### 1. Dependencies installieren
+### 1. Virtuelle Umgebung erstellen (empfohlen)
+
+```bash
+python3 -m venv venv
+source venv/bin/activate  # Auf Windows: venv\Scripts\activate
+```
+
+### 2. Dependencies installieren
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Pipeline ausführen
+### 3. Pipeline ausführen
 
 Die einfachste Methode ist, die gesamte Pipeline mit einem Befehl auszuführen:
 
 ```bash
 python run_pipeline.py
 ```
+
+**In PyCharm:** Einfach auf "Play" drücken (nach Setup, siehe unten)
 
 Dies führt automatisch alle Schritte aus:
 - ✅ Import & Bereinigung der Daten
@@ -29,22 +38,29 @@ Dies führt automatisch alle Schritte aus:
 Stellen Sie sicher, dass Sie im Hauptverzeichnis sind:
 
 ```bash
-cd /Users/noaj2/PycharmProjects/daw_Solar
+cd /Pfad/zum/daw_Solar  # Anpassen an Ihren Pfad
 ```
 
-### Schritt 2: Dependencies installieren
+### Schritt 2: Virtuelle Umgebung erstellen (empfohlen)
+
+```bash
+python3 -m venv venv
+source venv/bin/activate  # Auf Windows: venv\Scripts\activate
+```
+
+### Schritt 3: Dependencies installieren
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Oder mit pip3:
+Oder mit pip3 (falls nicht in venv):
 
 ```bash
 pip3 install -r requirements.txt
 ```
 
-### Schritt 3: Pipeline ausführen
+### Schritt 4: Pipeline ausführen
 
 **Option A: Vollständige Pipeline (empfohlen)**
 
@@ -64,7 +80,7 @@ python scripts/cleaning.py
 python scripts/visualization.py
 ```
 
-### Schritt 4: Ergebnisse prüfen
+### Schritt 5: Ergebnisse prüfen
 
 Nach der Ausführung finden Sie:
 
@@ -83,7 +99,20 @@ Nach der Ausführung finden Sie:
   - `correlation_heatmap.png` - Korrelationsmatrix
   - `lag_correlations_kp.png` - Lag-Analyse
 
-### Schritt 5: Jupyter Notebook (optional)
+### Schritt 6: PyCharm-Konfiguration (optional)
+
+Für automatische Interpreter-Auswahl in PyCharm:
+
+```bash
+python setup_pycharm.py
+```
+
+Danach:
+1. PyCharm neu starten (File → Invalidate Caches / Restart)
+2. Run → "Run Pipeline" sollte verfügbar sein
+3. Einfach auf "Play" drücken
+
+### Schritt 7: Jupyter Notebook (optional)
 
 Für interaktive Analyse:
 
@@ -109,20 +138,32 @@ pip install -r requirements.txt
 ### Problem: "FileNotFoundError: data/raw/SN_d_tot_V2.0.csv"
 
 **Lösung:** Stellen Sie sicher, dass:
-1. Sie im Hauptverzeichnis sind (`/Users/noaj2/PycharmProjects/daw_Solar`)
+1. Sie im Hauptverzeichnis sind (wo `run_pipeline.py` liegt)
 2. Die Rohdaten in `data/raw/` vorhanden sind
+3. Das Skript automatisch ins richtige Verzeichnis wechselt (siehe `run_pipeline.py`)
 
 ### Problem: "Permission denied" beim Ausführen
 
-**Lösung:** Machen Sie die Skripte ausführbar:
-```bash
-chmod +x run_pipeline.py
-```
-
-Oder verwenden Sie Python explizit:
+**Lösung:** Verwenden Sie Python explizit:
 ```bash
 python3 run_pipeline.py
 ```
+
+Oder mit virtueller Umgebung:
+```bash
+source venv/bin/activate
+python run_pipeline.py
+```
+
+### Problem: PyCharm verwendet falschen Interpreter
+
+**Lösung:** 
+1. Führen Sie `python setup_pycharm.py` aus
+2. File → Settings → Project → Python Interpreter
+3. Wählen Sie: `venv/bin/python3` oder den vollständigen Pfad
+4. Apply → OK
+
+Oder: Run → Edit Configurations → Python interpreter auf `venv/bin/python3` setzen
 
 ## Projektstruktur nach Ausführung
 
@@ -159,4 +200,6 @@ git status
 ```
 
 Die neuen Dateien in `data/processed/`, `data/results/` und `plots/` sollten als "untracked" erscheinen.
+
+**Hinweis:** Die Dateien in `data/processed/`, `data/results/` und `plots/` werden normalerweise nicht versioniert (siehe `.gitignore`), da sie aus den Skripten reproduzierbar sind.
 
